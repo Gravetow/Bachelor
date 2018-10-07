@@ -280,8 +280,10 @@ PlayerSettings:
     m_Devices:
     - Oculus
   - m_BuildTarget: Metro
-    m_Enabled: 0
-    m_Devices: []
+    m_Enabled: 1
+    m_Devices:
+    - WindowsMR
+    - Vuforia
   - m_BuildTarget: N3DS
     m_Enabled: 0
     m_Devices: []
@@ -305,6 +307,8 @@ PlayerSettings:
     m_Enabled: 1
     m_Devices:
     - OpenVR
+    - MockHMD
+    - Vuforia
   - m_BuildTarget: Tizen
     m_Enabled: 0
     m_Devices: []
@@ -329,7 +333,11 @@ PlayerSettings:
   - m_BuildTarget: tvOS
     m_Enabled: 0
     m_Devices: []
-  m_BuildTargetEnableVuforiaSettings: []
+  m_BuildTargetEnableVuforiaSettings:
+  - m_BuildTarget: Standalone
+    m_Enabled: 1
+  - m_BuildTarget: Metro
+    m_Enabled: 1
   openGLRequireES31: 0
   openGLRequireES31AEP: 0
   m_TemplateCustomTags: {}

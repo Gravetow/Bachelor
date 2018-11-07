@@ -39,5 +39,7 @@ public class ButtonInput : InteractionReceiver
                 modeSettings.currentMode = Mode.RESET;
                 break;
         }
+
+        signalBus.Fire<ButtonPressedSignal>();
     }
 }

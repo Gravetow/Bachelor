@@ -13,11 +13,15 @@ public class ModeMenu : MonoBehaviour
     {
         offset = transform.position;
         signalBus.Subscribe<LookUpSignal>(HideMenu);
+        signalBus.Subscribe<LookDownSignal>(ShowMenu);
+        signalBus.Subscribe<ButtonPressedSignal>(HideMenu);
     }
 
     private void OnDestroy()
     {
         signalBus.Unsubscribe<LookUpSignal>(HideMenu);
+        signalBus.Unsubscribe<LookDownSignal>(ShowMenu);
+        signalBus.Unsubscribe<ButtonPressedSignal>(HideMenu);
     }
 
     public void ShowMenu()

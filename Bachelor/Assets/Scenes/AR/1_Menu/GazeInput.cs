@@ -6,12 +6,19 @@ public class GazeInput : MonoBehaviour
     [Inject]
     public readonly SignalBus signalBus;
 
+    private bool lookingUp = true;
+
     public void Update()
     {
-        if (transform.eulerAngles.x > 15)
+        if (transform.eulerAngles.x > 15 && lookingUp)
         {
             signalBus.Fire<LookDownSignal>();
-            Debug.Log("oho");
+            lookingUp = false;
+        }
+        else if (transform.eulerAngles.x < 15 && lookingUp == false)
+        {
+            signalBus.Fire<LookUpSignal>();
+            lookingUp = true;
         }
 
         Debug.DrawRay(Camera.main.transform.position,

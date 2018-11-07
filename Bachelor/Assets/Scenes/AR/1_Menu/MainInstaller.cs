@@ -8,6 +8,7 @@ public class MainInstaller : MonoInstaller
         SignalBusInstaller.Install(Container);
 
         Container.DeclareSignal<LookDownSignal>();
+        Container.DeclareSignal<LookUpSignal>();
         Container.DeclareSignal<GazeSignal>();
         Container.DeclareSignal<CommitSignal>();
 

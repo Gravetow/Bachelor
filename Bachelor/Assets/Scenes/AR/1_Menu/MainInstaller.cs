@@ -7,12 +7,13 @@ public class MainInstaller : MonoInstaller
     {
         SignalBusInstaller.Install(Container);
 
-        Container.DeclareSignal<LookDownSignal>();
+        Container.DeclareSignal<ButtonPressedSignal>();
         Container.DeclareSignal<LookUpSignal>();
         Container.DeclareSignal<GazeSignal>();
         Container.DeclareSignal<CommitSignal>();
 
-        Container.BindInterfacesTo<GazeInput>().AsSingle();
+        Container.Bind<ModeSettings>().FromNewComponentOnNewGameObject().AsSingle();
+        Container.BindInterfacesTo<ButtonInput>().AsSingle();
         Container.BindInterfacesTo<ModeMenu>().AsSingle();
     }
 }

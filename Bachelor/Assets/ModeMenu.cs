@@ -7,25 +7,31 @@ public class ModeMenu : MonoBehaviour
     [Inject]
     private readonly SignalBus signalBus;
 
+    private Vector3 offset;
+
     private void Start()
     {
-        signalBus.Subscribe<LookDownSignal>(ShowMenu);
+        offset = transform.position;
         signalBus.Subscribe<LookUpSignal>(HideMenu);
     }
 
     private void OnDestroy()
     {
-        signalBus.Unsubscribe<LookDownSignal>(ShowMenu);
         signalBus.Unsubscribe<LookUpSignal>(HideMenu);
     }
 
     public void ShowMenu()
     {
-        transform.SetParent(null);
+        transform.DOScale(1, 0.5f);
     }
 
     public void HideMenu()
     {
-        transform.SetParent(Camera.main.transform);
+        transform.DOScale(0, 0.5f);
+    }
+
+    private void LateUpdate()
+    {
+        transform.position = Camera.main.transform.position + offset;
     }
 }

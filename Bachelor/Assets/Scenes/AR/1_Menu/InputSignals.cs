@@ -1,4 +1,4 @@
-﻿public class LookDownSignal { }
+﻿public class ButtonPressedSignal { }
 
 public class LookUpSignal { }
 

@@ -15,6 +15,8 @@ public class MainInstaller : MonoInstaller
 
         Container.Bind<ModeSettings>().AsSingle();
         Container.BindInterfacesTo<Zoomable>().AsSingle();
+        Container.BindInterfacesTo<Reachable>().AsSingle();
+        Container.BindInterfacesTo<Notable>().AsSingle();
         Container.BindInterfacesTo<ButtonInput>().AsSingle();
         Container.BindInterfacesTo<HeadInput>().AsSingle();
         Container.BindInterfacesTo<ModeMenu>().AsSingle();

@@ -11,6 +11,7 @@ public class ModeMenu : MonoBehaviour
 
     private void Start()
     {
+        ShowMenu();
         offset = transform.position;
         signalBus.Subscribe<LookUpSignal>(HideMenu);
         signalBus.Subscribe<LookDownSignal>(ShowMenu);

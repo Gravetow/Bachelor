@@ -5,16 +5,24 @@ using Zenject;
 
 public class ListView : MonoBehaviour
 {
-    [Inject] private ListData listData;
+    [Inject] private SignalBus _signalBus;
 
-    public GameObject ListElementPrefab;
-    public Transform ListContainer;
+    [SerializeField]
+    private ListData listData;
+
+    [SerializeField]
+    private GameObject listElementPrefab;
+
+    [SerializeField]
+    private Transform listContainer;
 
     private void Start()
     {
         foreach (ListElementData listElementData in listData.listElementData)
         {
-            ListElement listElement = Instantiate(ListElementPrefab, ListContainer).GetComponent<ListElement>();
+            ListElementView listElement = Instantiate(listElementPrefab, listContainer).GetComponent<ListElementView>();
+            listElement.SetSignalBus(_signalBus);
+            listElement.SetData(listElementData.Title, listElementData.Description);
         }
     }
 }

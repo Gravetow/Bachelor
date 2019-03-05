@@ -22,8 +22,7 @@ public class VRListInstaller : MonoInstaller
         Container.BindSignal<SelectListElementSignal>()
         .ToMethod<ListData>(x => x.SetCurrentDescription).FromResolve();
 
-        Container.BindInterfacesTo<ListElement>().AsSingle();
-        Container.BindInterfacesTo<DetailPanelView>().AsSingle();
         Container.BindInterfacesTo<ListView>().AsSingle();
+        Container.BindInterfacesTo<DetailPanelView>().AsSingle();
     }
 }

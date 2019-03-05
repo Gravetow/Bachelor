@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ListElementData : MonoBehaviour
+[CreateAssetMenu(fileName = "New ListElementData", menuName = "VRList/ListElementData", order = 0)]
+public class ListElementData : ScriptableObject
 {
     private int id;
     public string Title;

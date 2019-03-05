@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 222729407184087542}
   - component: {fileID: 114263899967987828}
   m_Layer: 0
-  m_Name: TextMeshPro Text
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 222750067909094700}
   - component: {fileID: 114482693335272650}
   m_Layer: 0
-  m_Name: TextMeshPro Text (1)
+  m_Name: Description
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,6 @@ GameObject:
   - component: {fileID: 114479085491599142}
   - component: {fileID: 114207296544571842}
   - component: {fileID: 114042078999458780}
-  - component: {fileID: 114487642877578060}
   m_Layer: 0
   m_Name: ListElement
   m_TagString: Untagged
@@ -108,6 +107,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9ee73a53c3bd7e438b039179c8ff7a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  title: {fileID: 114263899967987828}
+  description: {fileID: 114482693335272650}
 --- !u!114 &114207296544571842
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -157,7 +158,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 1
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114263899967987828
@@ -255,11 +256,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -395,11 +396,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -413,19 +414,6 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &114487642877578060
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1552701702095876}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e662f2f55829ccc48a3aff8bb2d15c0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Title: 
-  Description: 
 --- !u!114 &114749862167515080
 MonoBehaviour:
   m_ObjectHideFlags: 1

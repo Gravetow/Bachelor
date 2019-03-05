@@ -2,7 +2,7 @@
 
 public class SelectListElementSignal
 {
-    public int Id;
+    public string description;
 }
 
 public class FilterListSignal { }

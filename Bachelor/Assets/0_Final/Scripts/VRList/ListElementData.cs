@@ -5,7 +5,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New ListElementData", menuName = "VRList/ListElementData", order = 0)]
 public class ListElementData : ScriptableObject
 {
-    private int id;
     public string Title;
     public string Description;
+    public List<FilterTag> FilterTags;
+}
+
+public enum FilterTag
+{
+    FIRSTOPTION,
+    SECONDOPTION,
+    THIRDOPTION
 }

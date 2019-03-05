@@ -8,6 +8,8 @@ public class ListElementView : MonoBehaviour
 {
     private SignalBus _signalBus;
 
+    private ListElementData listElementData;
+
     [SerializeField]
     private TextMeshProUGUI title;
 
@@ -19,10 +21,17 @@ public class ListElementView : MonoBehaviour
         _signalBus = signalBus;
     }
 
-    public void SetData(string title, string description)
+    public void SetData(ListElementData listElementData)
     {
-        this.title.SetText(title);
-        this.description.SetText(description);
+        this.listElementData = listElementData;
+
+        this.title.SetText(listElementData.Title);
+        this.description.SetText(listElementData.Description);
+    }
+
+    public List<FilterTag> GetFilterTags()
+    {
+        return listElementData.FilterTags;
     }
 
     public void OnSelectElement()

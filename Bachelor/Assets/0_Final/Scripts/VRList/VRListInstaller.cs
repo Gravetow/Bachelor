@@ -24,5 +24,6 @@ public class VRListInstaller : MonoInstaller
 
         Container.BindInterfacesTo<ListElement>().AsSingle();
         Container.BindInterfacesTo<DetailPanelView>().AsSingle();
+        Container.BindInterfacesTo<ListView>().AsSingle();
     }
 }

@@ -11,6 +11,9 @@ public class OverlayView : MonoBehaviour
     {
         _signalBus.Subscribe<ShowNotificationSignal>(Show);
         _signalBus.Subscribe<AcknowledgeNotificationSignal>(Hide);
+
+        overviewCanvas.SetActive(true);
+        overviewCanvas.SetActive(false);
     }
 
     private void OnDestroy()
@@ -34,7 +37,12 @@ public class OverlayView : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            _signalBus.Fire<ShowNotificationSignal>();
+            _signalBus.Fire(new ShowNotificationSignal()
+            {
+                title = "Notification",
+                description = "The changes for the 3D-model have been saved and the application will now visually represent them. " + "\n" +
+                "Please wait for a second before applying any new filters."
+            });
         }
 
         if (Input.GetKeyDown(KeyCode.T))

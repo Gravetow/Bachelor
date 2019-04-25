@@ -5,7 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/AR/1_Menu/MenuScene.unity
     guid: fbcf5294f15e7c54fb08387884a3f9e4
+  - enabled: 1
+    path: Assets/0_Final/Scenes/VRNotification.unity
+    guid: a59b703645051eb468a343792b4f3a8f
   m_configObjects: {}

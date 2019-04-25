@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 public class NotificationView : MonoBehaviour
@@ -21,6 +22,8 @@ public class NotificationView : MonoBehaviour
     private void Awake()
     {
         _signalBus.Subscribe<ShowNotificationSignal>(FillText);
+
+        gameObject.SetActive(false);
     }
 
     private void OnDestroy()
@@ -44,6 +47,16 @@ public class NotificationView : MonoBehaviour
         gameObject.SetActive(true);
 
         transform.DOMoveY(transform.position.y + 2, 0.75f).SetEase(Ease.InOutQuad)
-            .OnComplete(() => sound.Play());
+            .OnComplete(() =>
+            {
+                sound.Play();
+            });
+    }
+
+    public void Acknowledge()
+    {
+        sound.Stop();
+        _signalBus.Fire<AcknowledgeNotificationSignal>();
+        transform.DOMoveY(transform.position.y + 4, 1.5f).SetEase(Ease.InOutQuad).OnComplete(() => gameObject.SetActive(false));
     }
 }

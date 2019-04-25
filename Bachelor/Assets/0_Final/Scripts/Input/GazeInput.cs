@@ -67,6 +67,7 @@ public class GazeInput : MonoBehaviour
         if (currentlyHitObject != null)
         {
             ExecuteEvents.Execute(currentlyHitObject, new PointerEventData(EventSystem.current), ExecuteEvents.pointerClickHandler);
+            _signalBus.Fire(new SelectSignal() { selectedGameObject = currentlyHitObject });
         }
     }
 }

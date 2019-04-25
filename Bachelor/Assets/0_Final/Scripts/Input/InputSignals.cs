@@ -1,3 +1,8 @@
-﻿public class HoverSignal { }
+﻿using UnityEngine;
 
-public class SelectSignal { }
+public class HoverSignal { }
+
+public class SelectSignal
+{
+    public GameObject selectedGameObject;
+}

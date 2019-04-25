@@ -7,8 +7,6 @@ public class VRListInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-        SignalBusInstaller.Install(Container);
-
         Container.DeclareSignal<ShowListSignal>();
         Container.DeclareSignal<SelectListElementSignal>();
         Container.DeclareSignal<FilterListSignal>();

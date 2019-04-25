@@ -10,5 +10,6 @@ public class NotificationInstaller : MonoInstaller
 
         Container.BindInterfacesTo<OverlayView>().AsSingle();
         Container.BindInterfacesTo<NotificationView>().AsSingle();
+        Container.BindInterfacesTo<GuidingArrowView>().AsSingle();
     }
 }

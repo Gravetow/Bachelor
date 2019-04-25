@@ -7,7 +7,6 @@ using Zenject;
 public class DetailView : MonoBehaviour
 {
     //show list
-    //add line
 
     [Inject] private SignalBus _signalBus;
 
@@ -19,6 +18,9 @@ public class DetailView : MonoBehaviour
 
     [SerializeField] private LineRenderer lineRenderer;
     private float detailBoxSize;
+
+    private GameObject currentlySelectedGameObject;
+    private GameObject detailCopy;
 
     private void Awake()
     {
@@ -33,21 +35,38 @@ public class DetailView : MonoBehaviour
 
     private void CreateDetailView(SelectSignal args)
     {
+        if (args.selectedGameObject.GetComponent<MeshRenderer>() == null)
+            return;
+
+        if (currentlySelectedGameObject != null)
+        {
+            lineRenderer.gameObject.SetActive(false);
+            Destroy(detailCopy);
+            currentlySelectedGameObject.GetComponent<MeshRenderer>().material = defaultMaterial;
+        }
+
+        currentlySelectedGameObject = args.selectedGameObject;
         args.selectedGameObject.GetComponent<MeshRenderer>().material = highlightMaterial;
-        GameObject detailCopy = Instantiate(args.selectedGameObject, detailBox);
+        detailCopy = Instantiate(args.selectedGameObject, detailBox);
         detailCopy.transform.position = args.selectedGameObject.transform.position;
 
-        detailCopy.transform.DOLocalMove(Vector3.zero, 5f);
-        ScaleDown(detailCopy);
+        detailCopy.transform.DOLocalMove(Vector3.zero, 5f).OnComplete(() =>
+        {
+            lineRenderer.SetPosition(0, detailBox.transform.position);
+            lineRenderer.SetPosition(1, args.selectedGameObject.transform.position);
+            lineRenderer.gameObject.SetActive(true);
+        });
+
+        ScaleDown();
     }
 
-    private void ScaleDown(GameObject target)
+    private void ScaleDown()
     {
-        target.transform.DOScale(0.5f * target.transform.localScale, 1f).OnComplete(() =>
+        detailCopy.transform.DOScale(0.5f * detailCopy.transform.localScale, 1f).OnComplete(() =>
         {
-            if (GetMaxElement(target.GetComponent<BoxCollider>().bounds.size) > detailBoxSize)
+            if (GetMaxElement(detailCopy.GetComponent<BoxCollider>().bounds.size) > detailBoxSize)
             {
-                ScaleDown(target);
+                ScaleDown();
             }
         });
     }

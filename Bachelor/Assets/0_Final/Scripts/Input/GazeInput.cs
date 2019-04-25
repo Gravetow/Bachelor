@@ -26,8 +26,6 @@ public class GazeInput : MonoBehaviour
     {
         RaycastHit hit;
 
-        //Debug.Log(EventSystem.current.currentSelectedGameObject);
-
         // Does the ray intersect any objects excluding the player layer
         if (Physics.Raycast(camera.transform.position, camera.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
         {

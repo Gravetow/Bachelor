@@ -8,19 +8,21 @@ public class DetailView : MonoBehaviour
 {
     //show list
     //add line
-    //tween gameobject to List + resize gameobject
 
     [Inject] private SignalBus _signalBus;
 
     [SerializeField] private Transform SFBParent;
+    [SerializeField] private Transform detailBox;
 
     [SerializeField] private Material highlightMaterial;
     [SerializeField] private Material defaultMaterial;
 
-    private Vector3 offsetSFB = new Vector3(740, 0, 0);
+    [SerializeField] private LineRenderer lineRenderer;
+    private float detailBoxSize;
 
     private void Awake()
     {
+        detailBoxSize = detailBox.GetChild(0).gameObject.GetComponent<MeshRenderer>().bounds.size.x;
         _signalBus.Subscribe<SelectSignal>(CreateDetailView);
     }
 
@@ -32,8 +34,26 @@ public class DetailView : MonoBehaviour
     private void CreateDetailView(SelectSignal args)
     {
         args.selectedGameObject.GetComponent<MeshRenderer>().material = highlightMaterial;
-        GameObject detailCopy = Instantiate(args.selectedGameObject, args.selectedGameObject.transform);
+        GameObject detailCopy = Instantiate(args.selectedGameObject, detailBox);
+        detailCopy.transform.position = args.selectedGameObject.transform.position;
 
-        detailCopy.transform.DOMove(Camera.main.transform.position += offsetSFB, 10f);
+        detailCopy.transform.DOLocalMove(Vector3.zero, 5f);
+        ScaleDown(detailCopy);
+    }
+
+    private void ScaleDown(GameObject target)
+    {
+        target.transform.DOScale(0.5f * target.transform.localScale, 1f).OnComplete(() =>
+        {
+            if (GetMaxElement(target.GetComponent<BoxCollider>().bounds.size) > detailBoxSize)
+            {
+                ScaleDown(target);
+            }
+        });
+    }
+
+    private float GetMaxElement(Vector3 vector)
+    {
+        return Mathf.Max(Mathf.Max(vector.x, vector.y), vector.z);
     }
 }

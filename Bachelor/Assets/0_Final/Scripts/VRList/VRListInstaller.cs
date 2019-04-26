@@ -10,6 +10,7 @@ public class VRListInstaller : MonoInstaller
         Container.DeclareSignal<ShowListSignal>();
         Container.DeclareSignal<SelectListElementSignal>();
         Container.DeclareSignal<FilterListSignal>();
+        Container.DeclareSignal<FilterBySliderSignal>();
         Container.DeclareSignal<ShowSearchSignal>();
         Container.DeclareSignal<SearchListSignal>();
         Container.DeclareSignal<HideSearchSignal>();
@@ -22,7 +23,7 @@ public class VRListInstaller : MonoInstaller
 
         Container.BindInterfacesTo<DetailPanelView>().AsSingle();
         Container.BindInterfacesTo<FilterView>().AsSingle();
-        //Container.BindInterfacesAndSelfTo<ListView>().AsSingle();
+        Container.BindInterfacesAndSelfTo<FilterSlider>().AsSingle();
         Container.BindInterfacesTo<ListView>().AsSingle();
     }
 }

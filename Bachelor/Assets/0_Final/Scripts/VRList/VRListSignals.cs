@@ -12,6 +12,11 @@ public class FilterListSignal
     public List<FilterTag> filterTags;
 }
 
+public class FilterBySliderSignal
+{
+    public float amount;
+}
+
 public class ShowSearchSignal { }
 
 public class SearchListSignal { }

@@ -34,6 +34,11 @@ public class ListElementView : MonoBehaviour
         return listElementData.FilterTags;
     }
 
+    public float GetAmount()
+    {
+        return listElementData.Size;
+    }
+
     public void OnSelectElement()
     {
         _signalBus.Fire(new SelectListElementSignal() { description = this.description.text });

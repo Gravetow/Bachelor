@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Name: Object_87
   m_EditorClassIdentifier: 
   Title: Object_87
-  Description: "Diagonale > Fassade > Holzbalken > HolzDecke > Knoten > St\xFCtze_Stahl
-    > Zwischenplatte > Diagonale > Fassade > "
+  Description: ' > Diagonale > Fassade'
+  Size: 30.49289
   FilterTags: 02000000

@@ -11,13 +11,11 @@ public class DataCreater : MonoBehaviour
 
     public void CreateData()
     {
-        //foreach (Transform child in transform)
-        //{
-        optionNumber = 2;
-        parentDescription = "Demonstrator";
-        CreateAssetFromChildren(transform.GetChild(2));
-        //    optionNumber++;
-        //}
+        foreach (Transform child in transform)
+        {
+            CreateAssetFromChildren(child);
+            optionNumber++;
+        }
         AssetDatabase.SaveAssets();
     }
 
@@ -30,6 +28,7 @@ public class DataCreater : MonoBehaviour
                 ListElementData asset = ScriptableObject.CreateInstance<ListElementData>();
                 asset.Title = child.gameObject.name;
                 asset.Description = parentDescription;
+                asset.Size = child.GetComponent<MeshRenderer>().bounds.max.magnitude;
                 asset.FilterTags = new List<FilterTag>();
                 asset.FilterTags.Add((FilterTag)optionNumber);
 

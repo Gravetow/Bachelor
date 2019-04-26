@@ -7,6 +7,7 @@ public class ListElementData : ScriptableObject
 {
     public string Title;
     public string Description;
+    public float Size;
     public List<FilterTag> FilterTags;
 }
 

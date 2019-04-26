@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Name: brep_11_13
   m_EditorClassIdentifier: 
   Title: brep_11_13
-  Description: "Diagonale > Fassade > Holzbalken > HolzDecke > Knoten > St\xFCtze_Stahl
-    > Zwischenplatte > Diagonale > "
+  Description: ' > Diagonale'
+  Size: 42.002995
   FilterTags: 02000000

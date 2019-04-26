@@ -16,20 +16,28 @@ public class ListView : MonoBehaviour
     [SerializeField]
     private Transform listContainer;
 
+    [SerializeField]
+    private float sliderMagnitude = 2f;
+
+    private float currentSliderValue = 0f;
+    private List<FilterTag> currentFilterTags = new List<FilterTag>();
+
     private List<ListElementView> allListElements = new List<ListElementView>();
 
     private void Awake()
     {
         _signalBus.Subscribe<ShowListSignal>(Show);
         _signalBus.Subscribe<HideListSignal>(Hide);
-        _signalBus.Subscribe<FilterListSignal>(Filter);
+        _signalBus.Subscribe<FilterListSignal>(SetCurrentFilterTags);
+        _signalBus.Subscribe<FilterBySliderSignal>(SetCurrentFilterSliderValue);
     }
 
     private void OnDestroy()
     {
         _signalBus.Unsubscribe<ShowListSignal>(Show);
         _signalBus.Unsubscribe<HideListSignal>(Hide);
-        _signalBus.Unsubscribe<FilterListSignal>(Filter);
+        _signalBus.Unsubscribe<FilterListSignal>(SetCurrentFilterTags);
+        _signalBus.Unsubscribe<FilterBySliderSignal>(SetCurrentFilterSliderValue);
     }
 
     private void Start()
@@ -58,29 +66,41 @@ public class ListView : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void Filter(FilterListSignal filterListSignal)
+    public void Filter()
     {
         foreach (ListElementView listElementView in allListElements)
         {
-            if (filterListSignal.filterTags.Count > 0)
+            listElementView.gameObject.SetActive(true);
+
+            if (currentFilterTags.Count > 0)
             {
-                foreach (FilterTag filterTag in filterListSignal.filterTags)
+                foreach (FilterTag filterTag in currentFilterTags)
                 {
                     if (listElementView.GetFilterTags().Contains(filterTag) == false)
                     {
                         listElementView.gameObject.SetActive(false);
                         continue;
                     }
-                    else
-                    {
-                        listElementView.gameObject.SetActive(true);
-                    }
                 }
             }
-            else
+
+            if (listElementView.GetAmount() * sliderMagnitude < currentSliderValue)
             {
-                listElementView.gameObject.SetActive(true);
+                listElementView.gameObject.SetActive(false);
+                continue;
             }
         }
+    }
+
+    public void SetCurrentFilterTags(FilterListSignal filterListSignal)
+    {
+        currentFilterTags = filterListSignal.filterTags;
+        Filter();
+    }
+
+    public void SetCurrentFilterSliderValue(FilterBySliderSignal filterBySliderSignal)
+    {
+        currentSliderValue = filterBySliderSignal.amount;
+        Filter();
     }
 }

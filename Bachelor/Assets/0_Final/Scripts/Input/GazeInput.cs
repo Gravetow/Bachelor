@@ -10,7 +10,7 @@ public class GazeInput : MonoBehaviour
 
     private Vector3 startPosition;
     private GameObject currentlyHitObject;
-
+    private PointerEventData currentPointerEventData = new PointerEventData(EventSystem.current);
     [Inject] private SignalBus _signalBus;
 
     [SerializeField]
@@ -29,17 +29,14 @@ public class GazeInput : MonoBehaviour
         // Does the ray intersect any objects excluding the player layer
         if (Physics.Raycast(camera.transform.position, camera.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
         {
-            if (hit.collider.gameObject != currentlyHitObject)
-            {
-                currentlyHitObject = hit.collider.gameObject;
+            currentlyHitObject = hit.collider.gameObject;
 
-                PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
+            currentPointerEventData = new PointerEventData(EventSystem.current);
 
-                RaycastResult res = new RaycastResult();
-                pointerEventData.position = hit.point;
-                res.gameObject = hit.collider.gameObject;
-                ExecuteEvents.Execute(res.gameObject, pointerEventData, ExecuteEvents.pointerEnterHandler);
-            }
+            RaycastResult res = new RaycastResult();
+            currentPointerEventData.position = hit.point;
+            res.gameObject = hit.collider.gameObject;
+            ExecuteEvents.Execute(res.gameObject, currentPointerEventData, ExecuteEvents.pointerEnterHandler);
             transform.position = hit.point;
         }
         else
@@ -64,7 +61,7 @@ public class GazeInput : MonoBehaviour
     {
         if (currentlyHitObject != null)
         {
-            ExecuteEvents.Execute(currentlyHitObject, new PointerEventData(EventSystem.current), ExecuteEvents.pointerClickHandler);
+            ExecuteEvents.Execute(currentlyHitObject, currentPointerEventData, ExecuteEvents.pointerClickHandler);
             _signalBus.Fire(new SelectSignal() { selectedGameObject = currentlyHitObject });
         }
     }

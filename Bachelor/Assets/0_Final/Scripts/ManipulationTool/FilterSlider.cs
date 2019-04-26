@@ -2,13 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class FilterSlider : MonoBehaviour, IPointerClickHandler
 {
+    private Slider slider;
+
+    private void Awake()
+    {
+        slider = GetComponent<Slider>();
+    }
+
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.LogError(eventData.position);
-        throw new System.NotImplementedException();
+        Vector2 clickPosition;
+        if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(GetComponent<RectTransform>(), eventData.position, eventData.pressEventCamera, out clickPosition))
+            return;
+
+        Debug.Log(clickPosition.x + " " + (clickPosition.x + 75) / 1.5f);
+        slider.value = (clickPosition.x + 75) / 1.5f;
     }
 
     // Use this for initialization

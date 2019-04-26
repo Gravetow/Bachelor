@@ -23868,7 +23868,7 @@ MonoBehaviour:
   - {fileID: 1049981654}
   - {fileID: 129071037}
   - {fileID: 1376393588}
-  SelectedIndices: 00000000
+  SelectedIndices: 
   OnSelectionEvents:
     m_PersistentCalls:
       m_Calls:
@@ -51865,6 +51865,7 @@ GameObject:
   - component: {fileID: 1918467085}
   - component: {fileID: 1918467086}
   - component: {fileID: 1918467087}
+  - component: {fileID: 1918467088}
   m_Layer: 0
   m_Name: Slider (1)
   m_TagString: Untagged
@@ -51879,7 +51880,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1918467084}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.036}
+  m_LocalPosition: {x: 0, y: 0, z: -0.027}
   m_LocalScale: {x: 0.0025, y: 0.0025, z: 0.0025}
   m_Children:
   - {fileID: 954683439}
@@ -51933,8 +51934,8 @@ MonoBehaviour:
   m_HandleRect: {fileID: 163081358}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
+  m_MaxValue: 100
+  m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -51951,8 +51952,19 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 200, y: 20, z: 5}
+  m_Size: {x: 150, y: 20, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1918467088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1918467084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b8fa1bb129ddb4ba3e24ebdbe51001, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1920000239
 GameObject:
   m_ObjectHideFlags: 0

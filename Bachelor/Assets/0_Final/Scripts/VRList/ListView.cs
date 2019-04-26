@@ -60,20 +60,26 @@ public class ListView : MonoBehaviour
 
     public void Filter(FilterListSignal filterListSignal)
     {
-        Debug.Log(allListElements.Count);
         foreach (ListElementView listElementView in allListElements)
         {
-            foreach (FilterTag filterTag in filterListSignal.filterTags)
+            if (filterListSignal.filterTags.Count > 0)
             {
-                if (listElementView.GetFilterTags().Contains(filterTag) == false)
+                foreach (FilterTag filterTag in filterListSignal.filterTags)
                 {
-                    listElementView.gameObject.SetActive(false);
-                    continue;
+                    if (listElementView.GetFilterTags().Contains(filterTag) == false)
+                    {
+                        listElementView.gameObject.SetActive(false);
+                        continue;
+                    }
+                    else
+                    {
+                        listElementView.gameObject.SetActive(true);
+                    }
                 }
-                else
-                {
-                    listElementView.gameObject.SetActive(true);
-                }
+            }
+            else
+            {
+                listElementView.gameObject.SetActive(true);
             }
         }
     }

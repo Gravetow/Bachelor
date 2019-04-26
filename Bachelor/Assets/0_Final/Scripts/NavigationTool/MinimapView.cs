@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class MinimapView : MonoBehaviour
 {
@@ -9,22 +10,52 @@ public class MinimapView : MonoBehaviour
 
     private int i = 0;
 
+    [Inject] private SignalBus _signalBus;
+
+    private void Awake()
+    {
+        _signalBus.Subscribe<CreateWaypointSignal>(AddWaypointToList);
+    }
+
+    private void OnDestroy()
+    {
+        _signalBus.Unsubscribe<CreateWaypointSignal>(AddWaypointToList);
+    }
+
+    private void AddWaypointToList(CreateWaypointSignal args)
+    {
+        GameObject newWaypoint = Instantiate(waypoints[0].gameObject);
+        newWaypoint.transform.position = Camera.main.transform.position;
+        newWaypoint.transform.localEulerAngles = new Vector3(0, Camera.main.transform.localEulerAngles.y, 0);
+        waypoints.Add(newWaypoint.GetComponent<WaypointView>());
+    }
+
     public void PreviousWaypoint()
     {
+        i--;
+
         if (i < 0)
         {
             i = waypoints.Count - 1;
         }
 
-        waypoints[i].TeleportPlayer();
+        Teleport();
     }
 
     public void NextWaypoint()
     {
+        i++;
         if (i >= waypoints.Count)
         {
             i = 0;
         }
+
+        Teleport();
+    }
+
+    public void Teleport()
+    {
         waypoints[i].TeleportPlayer();
+        transform.position = Camera.main.transform.position + new Vector3(0, -0.5f, 2f); ;
     }
 }

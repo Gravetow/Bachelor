@@ -10,7 +10,9 @@ public class OpenNoteToolSignal { }
 
 public class CloseNoteToolSignal { }
 
-public class CreateWaypointSignal { }
+public class CreateWaypointSignal
+{
+}
 
 public class OpenViewToolSignal { }
 

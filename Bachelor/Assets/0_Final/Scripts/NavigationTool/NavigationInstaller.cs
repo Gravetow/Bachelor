@@ -1,16 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Zenject;
 
-public class NavigationInstaller : MonoBehaviour {
+public class NavigationInstaller : MonoInstaller
+{
+    public override void InstallBindings()
+    {
+        Container.DeclareSignal<PreviousWaypointSignal>();
+        Container.DeclareSignal<NextWaypointSignal>();
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        Container.BindInterfacesTo<MinimapView>().AsSingle();
+    }
 }

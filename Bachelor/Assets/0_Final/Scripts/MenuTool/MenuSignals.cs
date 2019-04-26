@@ -1,4 +1,8 @@
-﻿public class OpenNavigationToolSignal { }
+﻿public class OpenMenuSignal { }
+
+public class CloseMenuSignal { }
+
+public class OpenNavigationToolSignal { }
 
 public class CloseNavigationToolSignal { }
 

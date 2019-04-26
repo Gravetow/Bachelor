@@ -5,6 +5,8 @@ public class MenuInstaller : MonoInstaller
 {
     public override void InstallBindings()
     {
+        Container.DeclareSignal<OpenMenuSignal>();
+        Container.DeclareSignal<CloseMenuSignal>();
         Container.DeclareSignal<OpenNavigationToolSignal>();
         Container.DeclareSignal<CloseNavigationToolSignal>();
         Container.DeclareSignal<OpenNoteToolSignal>();

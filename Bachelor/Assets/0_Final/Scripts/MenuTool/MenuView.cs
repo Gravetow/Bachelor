@@ -13,7 +13,6 @@ public class MenuView : MonoBehaviour
         if (openMenu)
         {
             _signalBus.Fire<OpenNavigationToolSignal>();
-            Debug.LogError("aha");
         }
         else
         {
@@ -71,6 +70,15 @@ public class MenuView : MonoBehaviour
         else
         {
             _signalBus.Fire<CloseDetailToolSignal>();
+        }
+    }
+
+    //TODO: remove
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            GetComponent<Canvas>().enabled = !GetComponent<Canvas>().enabled;
         }
     }
 }

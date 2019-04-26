@@ -36,7 +36,7 @@ namespace HoloToolkit.UI.Keyboard
 
             if (!TouchScreenKeyboard.isSupported)
             {
-                Keyboard.Instance.Close();
+                //Keyboard.Instance.Close();
                 Keyboard.Instance.PresentKeyboard(text, KeyboardLayout);
 
                 if (KeyboardSpawnPoint != null)

@@ -12,7 +12,7 @@ namespace HoloToolkit.UI.Keyboard
     /// <summary>
     /// A simple general use keyboard that is ideal for AR/VR applications.
     /// </summary>
-    /// 
+    ///
     /// NOTE: This keyboard will not automatically appear when you select an InputField in your
     ///       Canvas. In order for the keyboard to appear you must call Keyboard.Instance.PresentKeyboard(string).
     ///       To retrieve the input from the Keyboard, subscribe to the textEntered event. Note that
@@ -21,7 +21,7 @@ namespace HoloToolkit.UI.Keyboard
     public class Keyboard : Singleton<Keyboard>, IDictationHandler
     {
         /// <summary>
-        /// Layout type enum for the type of keyboard layout to use.  
+        /// Layout type enum for the type of keyboard layout to use.
         /// This is used when spawning to enable the correct keys based on layout type.
         /// </summary>
         public enum LayoutType
@@ -211,7 +211,7 @@ namespace HoloToolkit.UI.Keyboard
 
         /// <summary>
         /// The default color of the mike key.
-        /// </summary>        
+        /// </summary>
         private Color _defaultColor;
 
         /// <summary>
@@ -220,7 +220,7 @@ namespace HoloToolkit.UI.Keyboard
         private Image _recordImage;
 
         /// <summary>
-        /// User can add an audio source to the keyboard to have a click be heard on tapping a key 
+        /// User can add an audio source to the keyboard to have a click be heard on tapping a key
         /// </summary>
         private AudioSource _audioSource;
 
@@ -258,7 +258,6 @@ namespace HoloToolkit.UI.Keyboard
             // Keep keyboard deactivated until needed
             gameObject.SetActive(false);
         }
-
 
         /// <summary>
         /// Set up Dictation, CanvasEX, and automatically select the TextInput object.
@@ -310,7 +309,6 @@ namespace HoloToolkit.UI.Keyboard
             m_LastKeyboardLayout = LayoutType.Alpha;
             Clear();
         }
-
 
         /// <summary>
         /// Called when dictation hypothesis is found. Not used here
@@ -393,7 +391,6 @@ namespace HoloToolkit.UI.Keyboard
             SetMicrophoneDefault();
         }
 
-
         /// <summary>
         /// Presents the default keyboard to the camera, with start text.
         /// </summary>
@@ -427,8 +424,9 @@ namespace HoloToolkit.UI.Keyboard
         }
 
         #endregion Present Functions
+
         /// <summary>
-        /// Function to reposition the Keyboard based on target position and vertical offset 
+        /// Function to reposition the Keyboard based on target position and vertical offset
         /// </summary>
         /// <param name="kbPos">World position for keyboard</param>
         /// <param name="verticalOffset">Optional vertical offset of keyboard</param>
@@ -440,7 +438,7 @@ namespace HoloToolkit.UI.Keyboard
         }
 
         /// <summary>
-        /// Function to reposition the Keyboard based on target transform and collider information 
+        /// Function to reposition the Keyboard based on target transform and collider information
         /// </summary>
         /// <param name="objectTransform">Transform of target object to remain relative to</param>
         /// <param name="aCollider">Optional collider information for offset placement</param>
@@ -773,7 +771,7 @@ namespace HoloToolkit.UI.Keyboard
                     OnTextSubmitted(this, EventArgs.Empty);
                 }
 
-                Close();
+                //Close();
             }
             else
             {
@@ -786,7 +784,6 @@ namespace HoloToolkit.UI.Keyboard
 
                 UpdateCaretPosition(m_CaretPosition);
             }
-
         }
 
         /// <summary>
@@ -894,10 +891,10 @@ namespace HoloToolkit.UI.Keyboard
             m_CaretPosition = InputField.caretPosition;
         }
 
-        #endregion
+        #endregion Keyboard Functions
 
         /// <summary>
-        /// Method to set the sizes by code, as the properties are private. 
+        /// Method to set the sizes by code, as the properties are private.
         /// Useful for scaling 'from the outside', for instance taking care of differences between
         /// immersive headsets and HoloLens
         /// </summary>

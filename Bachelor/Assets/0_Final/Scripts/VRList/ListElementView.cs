@@ -21,6 +21,22 @@ public class ListElementView : MonoBehaviour
         _signalBus = signalBus;
     }
 
+    public string GetTitle()
+    {
+        return title.text;
+    }
+
+    public void SetByNote(Note note)
+    {
+        title.text = note.Title;
+        description.text = note.Description;
+    }
+
+    public ListElementData GetData()
+    {
+        return listElementData;
+    }
+
     public void SetData(ListElementData listElementData)
     {
         this.listElementData = listElementData;

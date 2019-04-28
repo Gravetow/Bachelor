@@ -33,7 +33,11 @@ public class MinimapView : MonoBehaviour
 
     private void ActivateMinimap()
     {
+        transform.position = Camera.main.transform.position + Camera.main.transform.forward * 5;
+        transform.LookAt(Camera.main.transform);
+
         gameObject.SetActive(true);
+
         foreach (BoxCollider collider in targetModel.GetComponentsInChildren<BoxCollider>())
         {
             collider.enabled = false;

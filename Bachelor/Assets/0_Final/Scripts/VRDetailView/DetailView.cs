@@ -8,7 +8,6 @@ public class DetailView : MonoBehaviour
 {
     [Inject] private SignalBus _signalBus;
 
-    [SerializeField] private Transform SFBParent;
     [SerializeField] private Transform detailBox;
 
     [SerializeField] private Material highlightMaterial;
@@ -23,11 +22,29 @@ public class DetailView : MonoBehaviour
     {
         detailBoxSize = detailBox.GetChild(0).gameObject.GetComponent<MeshRenderer>().bounds.size.x;
         _signalBus.Subscribe<SubmittedSignal>(CreateDetailView);
+        _signalBus.Subscribe<OpenDetailToolSignal>(OpenDetailView);
+        _signalBus.Subscribe<CloseDetailToolSignal>(CloseDetailView);
+
+        gameObject.SetActive(false);
     }
 
     private void OnDestroy()
     {
         _signalBus.Unsubscribe<SubmittedSignal>(CreateDetailView);
+        _signalBus.Unsubscribe<OpenDetailToolSignal>(OpenDetailView);
+        _signalBus.Unsubscribe<CloseDetailToolSignal>(CloseDetailView);
+    }
+
+    private void OpenDetailView()
+    {
+        transform.position = Camera.main.transform.position + Camera.main.transform.forward * 5;
+        transform.LookAt(Camera.main.transform);
+        gameObject.SetActive(true);
+    }
+
+    private void CloseDetailView()
+    {
+        gameObject.SetActive(false);
     }
 
     private void CreateDetailView(SubmittedSignal submitted)

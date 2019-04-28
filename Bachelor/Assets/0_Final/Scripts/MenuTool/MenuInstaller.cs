@@ -19,5 +19,6 @@ public class MenuInstaller : MonoInstaller
         Container.DeclareSignal<CloseManipulationToolSignal>();
 
         Container.BindInterfacesTo<MenuView>().AsSingle();
+        Container.BindInterfacesTo<ManipulationView>().AsSingle();
     }
 }

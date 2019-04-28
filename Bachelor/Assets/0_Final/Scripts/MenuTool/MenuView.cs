@@ -23,6 +23,7 @@ public class MenuView : MonoBehaviour
     private void ToggleMenu()
     {
         transform.position = Camera.main.transform.position + Camera.main.transform.forward * 5;
+        transform.LookAt(Camera.main.transform);
         gameObject.SetActive(!gameObject.activeSelf);
     }
 

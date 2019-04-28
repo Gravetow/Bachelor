@@ -15,15 +15,5 @@ public class DetailPanelView : MonoBehaviour
     private void Update()
     {
         description.SetText(listData.CurrentDescription);
-
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            _signalBus.Fire(new ShowListSignal());
-        }
-
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            _signalBus.Fire(new HideListSignal());
-        }
     }
 }

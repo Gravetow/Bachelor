@@ -13,6 +13,9 @@ public class MinimapView : MonoBehaviour
     [SerializeField]
     private GameObject targetModel;
 
+    [SerializeField]
+    private GameObject waypointPrefab;
+
     [Inject] private SignalBus _signalBus;
 
     private void Awake()
@@ -55,7 +58,8 @@ public class MinimapView : MonoBehaviour
 
     private void AddWaypointToList(CreateWaypointSignal args)
     {
-        GameObject newWaypoint = Instantiate(waypoints[0].gameObject);
+        GameObject newWaypoint = Instantiate(waypointPrefab);
+        newWaypoint.GetComponent<WaypointView>()._signalBus = this._signalBus;
         newWaypoint.transform.position = Camera.main.transform.position;
         newWaypoint.transform.localEulerAngles = new Vector3(0, Camera.main.transform.localEulerAngles.y, 0);
         waypoints.Add(newWaypoint.GetComponent<WaypointView>());

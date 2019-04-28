@@ -11,8 +11,6 @@ public enum ViewToolMode
 
 public class ViewTool : MonoBehaviour
 {
-    //show list
-
     [Inject] private SignalBus _signalBus;
 
     [SerializeField] private Material highlightMaterial;
@@ -22,12 +20,28 @@ public class ViewTool : MonoBehaviour
 
     private void Awake()
     {
-        _signalBus.Subscribe<SelectSignal>(ActivateTool);
+        _signalBus.Subscribe<SubmittedSignal>(ActivateTool);
+        _signalBus.Subscribe<OpenViewToolSignal>(OpenViewTool);
+        _signalBus.Subscribe<CloseViewToolSignal>(CloseViewTool);
+
+        gameObject.SetActive(false);
     }
 
     private void OnDestroy()
     {
-        _signalBus.Unsubscribe<SelectSignal>(ActivateTool);
+        _signalBus.Unsubscribe<SubmittedSignal>(ActivateTool);
+        _signalBus.Unsubscribe<OpenViewToolSignal>(OpenViewTool);
+        _signalBus.Unsubscribe<CloseViewToolSignal>(CloseViewTool);
+    }
+
+    private void OpenViewTool()
+    {
+        gameObject.SetActive(true);
+    }
+
+    private void CloseViewTool()
+    {
+        gameObject.SetActive(false);
     }
 
     public void ActivateShow()
@@ -45,9 +59,12 @@ public class ViewTool : MonoBehaviour
         currentToolMode = ViewToolMode.HIGHLIGHT;
     }
 
-    private void ActivateTool(SelectSignal args)
+    private void ActivateTool(SubmittedSignal args)
     {
-        MeshRenderer meshRenderer = args.selectedGameObject.GetComponent<MeshRenderer>();
+        if (args.submittedGameObject.GetComponent<CapsuleCollider>() == null)
+            return;
+
+        MeshRenderer meshRenderer = args.submittedGameObject.GetComponent<MeshRenderer>();
         if (meshRenderer == null)
             return;
 

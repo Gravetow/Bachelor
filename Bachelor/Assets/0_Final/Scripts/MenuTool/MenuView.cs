@@ -24,6 +24,7 @@ public class MenuView : MonoBehaviour
     {
         transform.position = Camera.main.transform.position + Camera.main.transform.forward * 5;
         transform.LookAt(Camera.main.transform);
+        transform.Rotate(0, 180, 0);
         gameObject.SetActive(!gameObject.activeSelf);
     }
 

@@ -3265,6 +3265,8 @@ MonoBehaviour:
   - {fileID: 114840404983499750}
   - {fileID: 114378710890154176}
   targetModel: {fileID: 0}
+  WaypointPrefab: {fileID: 1286768778634408, guid: 43ec6785abba2f1418a1c5637ed9d0d5,
+    type: 2}
 --- !u!114 &114752424312710544
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -20,8 +20,8 @@ public class ManipulationView : MonoBehaviour
 
     private void OnDestroy()
     {
-        _signalBus.Unsubscribe<OpenNavigationToolSignal>(ActivateManipulationTool);
-        _signalBus.Unsubscribe<CloseNavigationToolSignal>(DeactivateManipulationTool);
+        _signalBus.Unsubscribe<OpenManipulationToolSignal>(ActivateManipulationTool);
+        _signalBus.Unsubscribe<CloseManipulationToolSignal>(DeactivateManipulationTool);
     }
 
     private void ActivateManipulationTool()

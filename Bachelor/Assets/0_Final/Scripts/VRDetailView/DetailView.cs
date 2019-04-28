@@ -37,8 +37,6 @@ public class DetailView : MonoBehaviour
 
     private void OpenDetailView()
     {
-        transform.position = Camera.main.transform.position + Camera.main.transform.forward * 5;
-        transform.LookAt(Camera.main.transform);
         gameObject.SetActive(true);
     }
 

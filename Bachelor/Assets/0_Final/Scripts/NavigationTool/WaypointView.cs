@@ -5,12 +5,12 @@ using Zenject;
 
 public class WaypointView : MonoBehaviour
 {
-    [Inject] private SignalBus _signalBus;
+    [Inject] public SignalBus _signalBus;
 
     [SerializeField]
     private Transform target;
 
-    private void Awake()
+    private void Start()
     {
         _signalBus.Subscribe<SubmittedSignal>(OnClicked);
     }

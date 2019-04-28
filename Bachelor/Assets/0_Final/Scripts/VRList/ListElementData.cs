@@ -9,7 +9,7 @@ public class ListElementData : ScriptableObject
     public string Description;
     public float Size;
     public List<FilterTag> FilterTags;
-    public List<Note> Notes = new List<Note>();
+    public List<Note> Notes;
 }
 
 public enum FilterTag

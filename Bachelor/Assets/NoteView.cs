@@ -5,6 +5,7 @@ using UnityEngine;
 using Zenject;
 using System.Linq;
 
+[System.Serializable]
 public class Note
 {
     public string Description;

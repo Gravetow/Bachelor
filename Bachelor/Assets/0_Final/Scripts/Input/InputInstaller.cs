@@ -3,6 +3,9 @@ using Zenject;
 
 public class InputInstaller : MonoInstaller
 {
+    [SerializeField]
+    private MaterialSettings materialSettings;
+
     public override void InstallBindings()
     {
         SignalBusInstaller.Install(Container);
@@ -11,9 +14,13 @@ public class InputInstaller : MonoInstaller
         Container.DeclareSignal<DeselectSignal>();
         Container.DeclareSignal<SubmitSignal>();
 
+        Container.Bind<MaterialSettings>().FromInstance(materialSettings).AsSingle();
+
         Container.BindInterfacesTo<InputEventHandler>().AsSingle();
         Container.BindInterfacesTo<GazeInput>().AsSingle();
         Container.BindInterfacesTo<ControllerInput>().AsSingle();
         Container.BindInterfacesTo<GazePointerView>().AsSingle();
+
+        Container.BindInterfacesTo<HoverHighlighter>().AsSingle();
     }
 }

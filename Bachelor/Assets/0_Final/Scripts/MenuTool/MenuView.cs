@@ -8,6 +8,24 @@ public class MenuView : MonoBehaviour
     [Inject]
     private SignalBus _signalBus;
 
+    private void Awake()
+    {
+        _signalBus.Subscribe<ToggleMenuSignal>(ToggleMenu);
+
+        gameObject.SetActive(false);
+    }
+
+    private void OnDestroy()
+    {
+        _signalBus.Unsubscribe<ToggleMenuSignal>(ToggleMenu);
+    }
+
+    private void ToggleMenu()
+    {
+        transform.position = Camera.main.transform.position + Camera.main.transform.forward * 5;
+        gameObject.SetActive(!gameObject.activeSelf);
+    }
+
     public void NavigationTool(bool openMenu)
     {
         if (openMenu)

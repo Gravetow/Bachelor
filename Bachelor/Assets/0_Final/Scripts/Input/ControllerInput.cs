@@ -24,5 +24,10 @@ public class ControllerInput : ITickable
             _signalBus.Fire(new EndDragSignal());
             _signalBus.Fire(new SubmitSignal());
         }
+
+        if (Input.GetKeyUp(KeyCode.Joystick1Button7))
+        {
+            _signalBus.Fire(new ToggleMenuSignal());
+        }
     }
 }

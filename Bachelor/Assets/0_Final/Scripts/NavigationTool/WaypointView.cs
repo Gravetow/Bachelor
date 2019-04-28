@@ -12,17 +12,17 @@ public class WaypointView : MonoBehaviour
 
     private void Awake()
     {
-        _signalBus.Subscribe<SelectSignal>(OnClicked);
+        _signalBus.Subscribe<SubmittedSignal>(OnClicked);
     }
 
     private void OnDestroy()
     {
-        _signalBus.Unsubscribe<SelectSignal>(OnClicked);
+        _signalBus.Unsubscribe<SubmittedSignal>(OnClicked);
     }
 
-    public void OnClicked(SelectSignal args)
+    public void OnClicked(SubmittedSignal submitted)
     {
-        if (args.selectedGameObject == gameObject)
+        if (submitted.submittedGameObject == gameObject)
         {
             TeleportPlayer();
         }

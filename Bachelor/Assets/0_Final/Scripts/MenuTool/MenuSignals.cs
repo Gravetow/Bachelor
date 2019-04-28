@@ -1,6 +1,4 @@
-﻿public class OpenMenuSignal { }
-
-public class CloseMenuSignal { }
+﻿public class ToggleMenuSignal { }
 
 public class OpenNavigationToolSignal { }
 

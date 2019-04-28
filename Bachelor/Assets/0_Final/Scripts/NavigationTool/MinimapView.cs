@@ -10,16 +10,43 @@ public class MinimapView : MonoBehaviour
 
     private int i = 0;
 
+    [SerializeField]
+    private GameObject targetModel;
+
     [Inject] private SignalBus _signalBus;
 
     private void Awake()
     {
         _signalBus.Subscribe<CreateWaypointSignal>(AddWaypointToList);
+        _signalBus.Subscribe<OpenNavigationToolSignal>(ActivateMinimap);
+        _signalBus.Subscribe<CloseNavigationToolSignal>(DeactivateMinimap);
+
+        gameObject.SetActive(false);
     }
 
     private void OnDestroy()
     {
         _signalBus.Unsubscribe<CreateWaypointSignal>(AddWaypointToList);
+        _signalBus.Unsubscribe<OpenNavigationToolSignal>(ActivateMinimap);
+        _signalBus.Unsubscribe<CloseNavigationToolSignal>(DeactivateMinimap);
+    }
+
+    private void ActivateMinimap()
+    {
+        gameObject.SetActive(true);
+        foreach (BoxCollider collider in targetModel.GetComponentsInChildren<BoxCollider>())
+        {
+            collider.enabled = false;
+        }
+    }
+
+    private void DeactivateMinimap()
+    {
+        gameObject.SetActive(false);
+        foreach (BoxCollider collider in targetModel.GetComponentsInChildren<BoxCollider>())
+        {
+            collider.enabled = true;
+        }
     }
 
     private void AddWaypointToList(CreateWaypointSignal args)

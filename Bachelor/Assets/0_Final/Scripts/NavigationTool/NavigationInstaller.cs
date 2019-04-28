@@ -8,6 +8,7 @@ public class NavigationInstaller : MonoInstaller
         Container.DeclareSignal<PreviousWaypointSignal>();
         Container.DeclareSignal<NextWaypointSignal>();
 
+        Container.BindInterfacesTo<WaypointView>().AsSingle();
         Container.BindInterfacesTo<MinimapView>().AsSingle();
     }
 }

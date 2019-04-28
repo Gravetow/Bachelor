@@ -17,41 +17,41 @@ public class DetailView : MonoBehaviour
     [SerializeField] private LineRenderer lineRenderer;
     private float detailBoxSize;
 
-    private GameObject currentlySelectedGameObject;
     private GameObject detailCopy;
 
     private void Awake()
     {
         detailBoxSize = detailBox.GetChild(0).gameObject.GetComponent<MeshRenderer>().bounds.size.x;
-        _signalBus.Subscribe<SelectSignal>(CreateDetailView);
+        _signalBus.Subscribe<SubmittedSignal>(CreateDetailView);
     }
 
     private void OnDestroy()
     {
-        _signalBus.Unsubscribe<SelectSignal>(CreateDetailView);
+        _signalBus.Unsubscribe<SubmittedSignal>(CreateDetailView);
     }
 
-    private void CreateDetailView(SelectSignal args)
+    private void CreateDetailView(SubmittedSignal submitted)
     {
-        if (args.selectedGameObject.GetComponent<MeshRenderer>() == null)
+        if (submitted.submittedGameObject.GetComponent<MeshRenderer>() == null)
             return;
 
-        if (currentlySelectedGameObject != null)
+        if (detailCopy != null)
         {
             lineRenderer.gameObject.SetActive(false);
             Destroy(detailCopy);
-            currentlySelectedGameObject.GetComponent<MeshRenderer>().material = defaultMaterial;
+            submitted.submittedGameObject.GetComponent<MeshRenderer>().material = defaultMaterial;
         }
 
-        currentlySelectedGameObject = args.selectedGameObject;
-        args.selectedGameObject.GetComponent<MeshRenderer>().material = highlightMaterial;
-        detailCopy = Instantiate(args.selectedGameObject, detailBox);
-        detailCopy.transform.position = args.selectedGameObject.transform.position;
+        submitted.submittedGameObject.GetComponent<MeshRenderer>().material = highlightMaterial;
+        detailCopy = Instantiate(submitted.submittedGameObject, detailBox);
+        Vector3 startPosition = submitted.submittedGameObject.transform.position;
+
+        detailCopy.transform.position = submitted.submittedGameObject.transform.position;
 
         detailCopy.transform.DOLocalMove(Vector3.zero, 5f).OnComplete(() =>
         {
             lineRenderer.SetPosition(0, detailBox.transform.position);
-            lineRenderer.SetPosition(1, args.selectedGameObject.transform.position);
+            lineRenderer.SetPosition(1, startPosition);
             lineRenderer.gameObject.SetActive(true);
         });
 
@@ -65,6 +65,10 @@ public class DetailView : MonoBehaviour
             if (GetMaxElement(detailCopy.GetComponent<BoxCollider>().bounds.size) > detailBoxSize)
             {
                 ScaleDown();
+            }
+            else
+            {
+                detailCopy.GetComponent<BoxCollider>().enabled = false;
             }
         });
     }

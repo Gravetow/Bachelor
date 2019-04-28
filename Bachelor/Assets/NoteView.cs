@@ -39,18 +39,18 @@ public class NoteView : MonoBehaviour
     private void Awake()
     {
         keyboard.OnTextSubmitted += Keyboard_OnTextSubmitted;
-        _signalBus.Subscribe<SelectSignal>(CreateNoteView);
+        _signalBus.Subscribe<SubmittedSignal>(CreateNoteView);
     }
 
     private void OnDestroy()
     {
         keyboard.OnTextSubmitted -= Keyboard_OnTextSubmitted;
-        _signalBus.Unsubscribe<SelectSignal>(CreateNoteView);
+        _signalBus.Unsubscribe<SubmittedSignal>(CreateNoteView);
     }
 
-    private void CreateNoteView(SelectSignal args)
+    private void CreateNoteView(SubmittedSignal submitted)
     {
-        if (args.selectedGameObject.GetComponent<MeshRenderer>() == null)
+        if (submitted.submittedGameObject.GetComponent<MeshRenderer>() == null)
             return;
 
         foreach (Transform child in listContainer.transform)
@@ -58,7 +58,7 @@ public class NoteView : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        currentlySelectedObjectData = listData.listElementData.Find(x => x.Title == args.selectedGameObject.name);
+        currentlySelectedObjectData = listData.listElementData.Find(x => x.Title == submitted.submittedGameObject.name);
 
         if (currentlySelectedObjectData != null)
         {
@@ -94,13 +94,8 @@ public class NoteView : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     public void ShowKeyboard()
     {
-        keyboard.PresentKeyboard("Enter Note Title");
-    }
-
-    public void ApplyKeyboard()
-    {
+        keyboard.PresentKeyboard();
     }
 }

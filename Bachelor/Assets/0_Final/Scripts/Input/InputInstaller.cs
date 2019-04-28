@@ -13,6 +13,7 @@ public class InputInstaller : MonoInstaller
         Container.DeclareSignal<SelectSignal>();
         Container.DeclareSignal<DeselectSignal>();
         Container.DeclareSignal<SubmitSignal>();
+        Container.DeclareSignal<SubmittedSignal>();
 
         Container.DeclareSignal<BeginDragSignal>();
         Container.DeclareSignal<DragSignal>();

@@ -12,6 +12,11 @@ public class DeselectSignal { }
 
 public class SubmitSignal { }
 
+public class SubmittedSignal
+{
+    public GameObject submittedGameObject;
+}
+
 public class BeginDragSignal
 {
     public Vector3 position;

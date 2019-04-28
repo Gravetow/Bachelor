@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 using System.Linq;
+using TMPro;
 
 [System.Serializable]
 public class Note
@@ -32,6 +33,12 @@ public class NoteView : MonoBehaviour
 
     [SerializeField]
     private Keyboard keyboard;
+
+    [SerializeField]
+    private TextMeshProUGUI title;
+
+    [SerializeField]
+    private TextMeshProUGUI detailDescription;
 
     private ListElementData currentlySelectedObjectData;
     private Note currentNote = new Note();
@@ -62,6 +69,9 @@ public class NoteView : MonoBehaviour
 
         if (currentlySelectedObjectData != null)
         {
+            title.SetText(currentlySelectedObjectData.Title);
+            detailDescription.SetText(currentlySelectedObjectData.Description);
+
             foreach (Note listElementData in currentlySelectedObjectData.Notes)
             {
                 ListElementView noteElement = Instantiate(listElementPrefab, listContainer).GetComponent<ListElementView>();

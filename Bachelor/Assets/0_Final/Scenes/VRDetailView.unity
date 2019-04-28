@@ -54550,6 +54550,8 @@ MonoBehaviour:
     type: 2}
   listContainer: {fileID: 1490182578}
   keyboard: {fileID: 1629995309}
+  title: {fileID: 412563847}
+  detailDescription: {fileID: 409996789}
 --- !u!223 &1932213248
 Canvas:
   m_ObjectHideFlags: 0

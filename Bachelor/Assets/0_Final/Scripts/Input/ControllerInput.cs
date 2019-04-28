@@ -1,16 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
-public class ControllerInput : MonoBehaviour {
+public class ControllerInput : ITickable
+{
+    [Inject] private SignalBus _signalBus;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public void Tick()
+    {
+        if (Input.GetKeyDown(KeyCode.Joystick1Button5))
+        {
+            _signalBus.Fire(new SubmitSignal());
+        }
+    }
 }

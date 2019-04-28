@@ -9,9 +9,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e662f2f55829ccc48a3aff8bb2d15c0c, type: 3}
-  m_Name: brep_11_13
+  m_Name: 
   m_EditorClassIdentifier: 
-  Title: brep_11_13
-  Description: ' > Diagonale'
-  Size: 42.002995
-  FilterTags: 02000000
+  Title: 
+  Description: 
+  Size: 0
+  FilterTags: 
+  Notes: []

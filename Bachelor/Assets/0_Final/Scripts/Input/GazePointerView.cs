@@ -1,16 +1,33 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Zenject;
 
-public class GazePointerView : MonoBehaviour {
+public class GazePointerView : MonoBehaviour
+{
+    [Inject] private SignalBus _signalBus;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    private Vector3 startPosition;
+
+    private void Awake()
+    {
+        startPosition = transform.localPosition;
+
+        _signalBus.Subscribe<SelectSignal>(MoveOnTop);
+        _signalBus.Subscribe<DeselectSignal>(MoveBack);
+    }
+
+    private void OnDestroy()
+    {
+        _signalBus.Unsubscribe<SelectSignal>(MoveOnTop);
+        _signalBus.Unsubscribe<DeselectSignal>(MoveBack);
+    }
+
+    private void MoveOnTop(SelectSignal select)
+    {
+        transform.position = select.position;
+    }
+
+    private void MoveBack()
+    {
+        transform.localPosition = startPosition;
+    }
 }

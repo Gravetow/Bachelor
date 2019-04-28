@@ -14,6 +14,10 @@ public class InputInstaller : MonoInstaller
         Container.DeclareSignal<DeselectSignal>();
         Container.DeclareSignal<SubmitSignal>();
 
+        Container.DeclareSignal<BeginDragSignal>();
+        Container.DeclareSignal<DragSignal>();
+        Container.DeclareSignal<EndDragSignal>();
+
         Container.Bind<MaterialSettings>().FromInstance(materialSettings).AsSingle();
 
         Container.BindInterfacesTo<InputEventHandler>().AsSingle();

@@ -11,6 +11,17 @@ public class ControllerInput : ITickable
     {
         if (Input.GetKeyDown(KeyCode.Joystick1Button5))
         {
+            _signalBus.Fire(new BeginDragSignal());
+        }
+
+        if (Input.GetKey(KeyCode.Joystick1Button5))
+        {
+            _signalBus.Fire(new DragSignal());
+        }
+
+        if (Input.GetKeyUp(KeyCode.Joystick1Button5))
+        {
+            _signalBus.Fire(new EndDragSignal());
             _signalBus.Fire(new SubmitSignal());
         }
     }

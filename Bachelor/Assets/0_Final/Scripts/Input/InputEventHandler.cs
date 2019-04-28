@@ -15,6 +15,10 @@ public class InputEventHandler : IInitializable
         _signalBus.Subscribe<SelectSignal>(TriggerSelect);
         _signalBus.Subscribe<DeselectSignal>(TriggerDeselect);
         _signalBus.Subscribe<SubmitSignal>(TriggerSubmit);
+
+        _signalBus.Subscribe<BeginDragSignal>(TriggerBeginDrag);
+        _signalBus.Subscribe<DragSignal>(TriggerDrag);
+        _signalBus.Subscribe<EndDragSignal>(TriggerEndDrag);
     }
 
     private void OnDestroy()
@@ -22,6 +26,10 @@ public class InputEventHandler : IInitializable
         _signalBus.Unsubscribe<SelectSignal>(TriggerSelect);
         _signalBus.Unsubscribe<DeselectSignal>(TriggerDeselect);
         _signalBus.Unsubscribe<SubmitSignal>(TriggerSubmit);
+
+        _signalBus.Unsubscribe<BeginDragSignal>(TriggerBeginDrag);
+        _signalBus.Unsubscribe<DragSignal>(TriggerDrag);
+        _signalBus.Unsubscribe<EndDragSignal>(TriggerEndDrag);
     }
 
     private void TriggerSelect(SelectSignal select)
@@ -46,5 +54,21 @@ public class InputEventHandler : IInitializable
             return;
 
         ExecuteEvents.Execute(currentlySelectedObject, new PointerEventData(EventSystem.current), ExecuteEvents.pointerClickHandler);
+    }
+
+    private void TriggerBeginDrag()
+    {
+        Debug.Log(currentlySelectedObject);
+        ExecuteEvents.Execute(currentlySelectedObject, currentPointerEventData, ExecuteEvents.beginDragHandler);
+    }
+
+    private void TriggerDrag()
+    {
+        ExecuteEvents.Execute(currentlySelectedObject, currentPointerEventData, ExecuteEvents.dragHandler);
+    }
+
+    private void TriggerEndDrag()
+    {
+        ExecuteEvents.Execute(currentlySelectedObject, currentPointerEventData, ExecuteEvents.endDragHandler);
     }
 }

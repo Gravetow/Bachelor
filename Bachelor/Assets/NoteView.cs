@@ -65,6 +65,7 @@ public class NoteView : MonoBehaviour
             foreach (Note listElementData in currentlySelectedObjectData.Notes)
             {
                 ListElementView noteElement = Instantiate(listElementPrefab, listContainer).GetComponent<ListElementView>();
+                Debug.LogError(listElementData.Description);
                 noteElement.SetByNote(listElementData);
             }
         }
@@ -87,8 +88,6 @@ public class NoteView : MonoBehaviour
             ListElementView listElement = Instantiate(listElementPrefab, listContainer).GetComponent<ListElementView>();
             listElement.SetByNote(currentNote);
             currentlySelectedObjectData.Notes.Add(currentNote);
-            currentNote.Title = null;
-            currentNote.Description = null;
 
             keyboard.Close();
         }

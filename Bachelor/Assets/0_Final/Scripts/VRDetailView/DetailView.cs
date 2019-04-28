@@ -6,8 +6,6 @@ using Zenject;
 
 public class DetailView : MonoBehaviour
 {
-    //show list
-
     [Inject] private SignalBus _signalBus;
 
     [SerializeField] private Transform SFBParent;

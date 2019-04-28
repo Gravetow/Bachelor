@@ -34,9 +34,12 @@ public class InputEventHandler : IInitializable
 
     private void TriggerSelect(SelectSignal select)
     {
-        currentlySelectedObject = select.selectedGameObject;
-        currentPointerEventData.position = select.position;
-        ExecuteEvents.Execute(currentlySelectedObject, currentPointerEventData, ExecuteEvents.pointerEnterHandler);
+        if (currentlySelectedObject != select.selectedGameObject)
+        {
+            currentlySelectedObject = select.selectedGameObject;
+            currentPointerEventData.position = select.position;
+            ExecuteEvents.Execute(currentlySelectedObject, currentPointerEventData, ExecuteEvents.pointerEnterHandler);
+        }
     }
 
     private void TriggerDeselect()
@@ -50,6 +53,8 @@ public class InputEventHandler : IInitializable
 
     private void TriggerSubmit()
     {
+        Debug.Log(currentlySelectedObject);
+
         if (currentlySelectedObject == null)
             return;
 
@@ -58,7 +63,6 @@ public class InputEventHandler : IInitializable
 
     private void TriggerBeginDrag()
     {
-        Debug.Log(currentlySelectedObject);
         ExecuteEvents.Execute(currentlySelectedObject, currentPointerEventData, ExecuteEvents.beginDragHandler);
     }
 
